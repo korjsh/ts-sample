@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    restart: always
+    tty: true
+    stdin_open: true
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=example
+      - POSTGRES_PASSWORD=example
+  ts:
+    image: node:lts-alpine
+    volumes:
+      - ./1.express/:/app/1
+      - ./2.express-sequelize/:/app/2
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_ID=example
+      - DB_PASS=example
+      - DB_DIALECT=postgres
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
