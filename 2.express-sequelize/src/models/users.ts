@@ -1,4 +1,4 @@
-import { Model, DataTypes, WhereOptions, Order, JSON } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import { sequelize } from "./sequelize";
 
 export interface UserAttribute {
@@ -8,11 +8,11 @@ export interface UserAttribute {
   name: string;
 }
 
-class User extends Model implements UserAttribute {
-  public readonly id!: UserAttribute["id"];
+class User extends Model {
+  public readonly id!: number;
   public userId!: string;
   public password!: string;
-  public name: string;
+  public name!: string;
 }
 
 const columns = {
@@ -42,5 +42,21 @@ const options = {
   paranoid: true, // deletedAt
 };
 User.init(columns, options);
+
+export interface UserInsertParams {
+  id: number;
+  userId: string;
+  password: string;
+  name: string;
+}
+
+export interface UserUpdateParams {
+  id: number;
+  password?: string;
+  name?: string
+}
+export interface UserDeleteParams {
+  id: number;
+}
 
 export default User;

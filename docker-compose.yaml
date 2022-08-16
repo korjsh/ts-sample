@@ -8,7 +8,7 @@ services:
     tty: true
     stdin_open: true
     ports:
-      - 5435:5432
+      - 5439:5432
     environment:
       - POSTGRES_USER=example
       - POSTGRES_PASSWORD=example
@@ -27,4 +27,4 @@ services:
     tty: true
     stdin_open: true
     ports:
-      - 3000:3000
+      - 3010:3000
