@@ -3,8 +3,8 @@ import User, { UserDeleteParams, UserInsertParams, UserUpdateParams } from '../.
 const dao = {
   select() {
     return new Promise((resolve, reject) => {
-      User.findAll().then(selectList => {
-        resolve(selectList)
+      User.findAll().then(result => {
+        resolve(result)
       }).catch(err => {
         reject(err)
       })
@@ -40,11 +40,14 @@ const dao = {
 }
 
 const router = express.Router();
-
+// localhost/users/
 router.get("/", async (req: express.Request, res: express.Response) => {
-  const result = await dao.select()
-  console.log(result)
-  res.send(result);
+  try {
+    const result = await dao.select()
+    res.send(result)
+  } catch (err) {
+    res.send(err)
+  }
 });
 
 router.post('/', async (req: express.Request, res: express.Response) => {

@@ -28,6 +28,7 @@ const columns = {
   },
   password: {
     type: new DataTypes.STRING(500),
+    allowNull: false
   },
   name: {
     type: new DataTypes.STRING(100),
